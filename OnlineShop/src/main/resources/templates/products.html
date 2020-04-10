@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Online Shop - Products</title>
+	<link th:insert="fragment :: fragment-css" />
+	<link rel="stylesheet" th:href="@{/css/products.css}" />
+</head>
+<body>
+	<header th:insert="fragment.html :: nav"></header>
+
+	<!-- HTML GOES HERE -->
+	<div class="container mt-5">
+
+
+		<div id="products" class="row view-group">
+			<div th:each="product : ${phone}" class="item col-xs-4 col-lg-4">
+				<div class="thumbnail card">
+					<div class="img-event">
+						<img class="group list-group-image img-fluid"
+							th:src="@{${'images/PHONE/' + product.image}}" alt="" />
+					</div>
+					<div class="caption card-body">
+						<h4 th:text="${product.name}"
+							class="group card-title inner list-group-item-heading">
+							Product title</h4>
+						<p th:text="${product.description}"
+							class="group inner list-group-item-text">Product description</p>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<p th:text="${#numbers.formatCurrency(product.price)}"
+									class="lead font-weight-normal">$21.000</p>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<form th:action="@{'/products/' + ${product.id}}"
+									method="post">
+									<button type="submit" class="btn btn-success">Add to
+										cart</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:each="product : ${laptop}" class="item col-xs-4 col-lg-4">
+				<div class="thumbnail card">
+					<div class="img-event">
+						<img class="group list-group-image img-fluid"
+							th:src="@{${'images/LAPTOP/' + product.image}}" alt="" />
+					</div>
+					<div class="caption card-body">
+						<h4 th:text="${product.name}"
+							class="group card-title inner list-group-item-heading">
+							Product title</h4>
+						<p th:text="${product.description}"
+							class="group inner list-group-item-text">Product description</p>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<p th:text="${#numbers.formatCurrency(product.price)}"
+									class="lead font-weight-normal">$21.000</p>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<form th:action="@{'/viewProducts/' + ${product.id}}"
+									method="post">
+									<button type="submit" class="btn btn-success">Add to
+										cart</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:each="product : ${television}" class="item col-xs-4 col-lg-4">
+				<div class="thumbnail card">
+					<div class="img-event">
+						<img class="group list-group-image img-fluid"
+							th:src="@{${'images/TELEVISION/' + product.image}}" alt="" />
+					</div>
+					<div class="caption card-body">
+						<h4 th:text="${product.name}"
+							class="group card-title inner list-group-item-heading">
+							Product title</h4>
+						<p th:text="${product.description}"
+							class="group inner list-group-item-text">Product description</p>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<p th:text="${#numbers.formatCurrency(product.price)}"
+									class="lead font-weight-normal">$21.000</p>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<form th:action="@{'/viewProducts/' + ${product.id}}"
+									method="post">
+									<button type="submit" class="btn btn-success">Add to
+										cart</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<th:block th:insert="fragment.html :: assets"></th:block>
+</body>
+</html>
