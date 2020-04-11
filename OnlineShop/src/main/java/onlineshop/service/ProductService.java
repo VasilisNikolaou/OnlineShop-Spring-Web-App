@@ -2,6 +2,7 @@ package onlineshop.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -29,6 +30,13 @@ public class ProductService {
 		this.products = productRepo.findAll();
 		
 		return this.products;
+	}
+	
+	public Optional<Product> findById(Long id) {
+		return 
+				products.stream()
+				        .filter(product -> product.getId() == id)
+				        .findFirst();
 	}
 
 }

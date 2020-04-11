@@ -23,7 +23,7 @@ import onlineshop.data.TypeConverter;
 public class Category {
 
 	@Id
-	private Integer id;
+	private Long id;
 	
 	@Column(name = "name")
 	@Convert(converter=TypeConverter.class)
