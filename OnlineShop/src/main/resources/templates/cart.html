@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Online Shop - Cart</title>
+	<link th:insert="fragment :: fragment-css" />
+	<link rel="stylesheet" th:href="@{/css/cart.css}" />
 </head>
 <body>
+  
+   <header th:insert="fragment.html :: nav"></header>
+   
+   <!-- HTML GOES HERE -->
+	<div class="container my-5">
+		<div class="row">
+			<div class="col-12">
+				<div class="table-responsive"
+					th:if="${session.cart != null && !session.cart.items.isEmpty()}">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">Product</th>
+								<th scope="col">Available</th>
+								<th scope="col" class="text-center">Quantity</th>
+								<th scope="col" class="text-right">Price</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="item : ${session.cart.items}">
+								<td><img
+									th:src="@{${'images/' + item.product.getCategory().getType() + '/' + item.product.getImage_sm()}}" />
+								</td>
+								<td th:text="${item.product.getName()}">Product Name</td>
+								<td>In stock</td>
+								<td th:text="${item.quantity}" class="text-center">Quantity</td>
+								<td
+									th:text="${#numbers.formatCurrency(item.product.getPrice() * item.quantity)}"
+									class="text-right">70 &euro;</td>
+								<td class="text-right">
+									<form method="post"
+										th:action="@{'viewCart/remove/' + ${item.product.getName()}}">
+										<button class="btn btn-sm btn-danger">remove</button>
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><strong>Total</strong></td>
+								<td
+									th:text="${#numbers.formatCurrency(session.cart.totalPrice)}"
+									class="text-right"><strong>0 &euro;</strong></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div th:if="${session.cart == null || session.cart.items.isEmpty()}">
+					<h5 class="text-center mb-5">Your cart is empty.</h5>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="row">
+					<div class="col-sm-12  col-md-6">
+						<a class="btn btn-block btn-info" th:href="@{/viewProducts}"
+							role="button">Continue Shopping</a>
+					</div>
+					<div th:if="${session.cart != null && !session.cart.items.isEmpty()}" class="col-sm-12 col-md-6 text-right">
+						<a class="btn btn-lg btn-block btn-success text-uppercase" th:href="@{/order/current}" role="button">Checkout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+   
+   
+   
+   <th:block th:insert="fragment.html :: assets"></th:block>
 
 </body>
 </html>
