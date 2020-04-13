@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +14,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import onlineshop.model.Cart;
 import onlineshop.model.Category;
+import onlineshop.model.Item;
 import onlineshop.model.Product;
 import onlineshop.model.Category.Type;
 import onlineshop.service.ProductService;
 
 @Controller
 @RequestMapping("/products")
+@SessionAttributes("cart")
 public class ProductController {
 	
     private ProductService productService;
@@ -28,6 +33,11 @@ public class ProductController {
 	@Autowired
 	public ProductController(ProductService productService) {
 		this.productService = productService;
+	}
+	
+	@ModelAttribute("cart")
+	public Cart cart() {
+		return new Cart();
 	}
 	
 	@ModelAttribute
@@ -49,12 +59,25 @@ public class ProductController {
 	}
 	
 	@PostMapping("/{id}")
-	public String processProducts(@PathVariable Long id) {
+	public String processProducts(@PathVariable Long id, @ModelAttribute("cart") Cart cart) {
 		
 		Optional<Product> product = productService.findById(id);
-		System.out.println(product.get());
 		
-		return "redirect:/products";
+		if(product.isPresent()) {
+			Item item = new Item(product.get());
+			
+			cart.getItems().stream()
+					            .filter(i -> i.equals(item))
+					            .findFirst()
+					            .ifPresentOrElse(Item::updateQuantity, () -> {
+					         	    item.setQuantityToOne();
+					         	    cart.addItem(item);
+					            });
+			
+			cart.calculateTotalPrice();
+		}
+		
+		return "redirect:/cart";
 	}
 	
 	private List<Product> filterByType(List<Product> products, Type type) {
