@@ -38,5 +38,12 @@ public class ProductService {
 				        .filter(product -> product.getId() == id)
 				        .findFirst();
 	}
+	
+	public Optional<Product> findByName(String name) {
+		return products.stream()
+				           .filter(product -> product.getName().equals(name))
+				           .findFirst();
+		
+	}
 
 }
