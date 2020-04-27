@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,12 +14,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import onlineshop.model.Cart;
 import onlineshop.model.Order;
 
 
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class User {
 	
 	@Id
@@ -52,8 +61,8 @@ public class User {
 	@JoinColumn(name="cart_id")
 	private Cart cart;
 
-	public User(@NotEmpty String username, @NotEmpty String firstName, @NotEmpty String lastName,
-			@NotEmpty String password, @NotEmpty String email) {
+	public User(@NotBlank String username, @NotBlank String firstName, @NotBlank String lastName,
+			@NotBlank String password, @NotBlank String email) {
 		super();
 		this.username = username;
 		this.firstName = firstName;
