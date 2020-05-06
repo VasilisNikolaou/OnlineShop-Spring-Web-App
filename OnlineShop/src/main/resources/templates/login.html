@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+</head>
+<body>
+	<header th:insert="fragment.html :: nav"></header>
+
+	<div class="signup-form my-auto mx-auto">
+		<form th:action="@{/login}" method="post">
+			<h2>Login</h2>
+			<p th:if="${param.error}" class="alert alert-danger">Invalid
+				username or password</p>
+			<p th:if="${param.logout}" class="alert alert-success">You have
+				been logged out.</p>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Username"
+					name="username">
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" placeholder="Password"
+					name="password">
+			</div>
+			<div class="form-check mb-2">
+				<input type="checkbox" class="form-check-input" id="remember-me"
+					name="remember-me"> <label class="form-check-label"
+					for="remember-me">Remember me?</label>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+			</div>
+		</form>
+	</div>
+
+
+	<th:block th:insert="fragment.html :: assets"></th:block>
+</body>
+</html>
