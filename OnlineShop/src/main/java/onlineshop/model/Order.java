@@ -30,7 +30,7 @@ import onlineshop.model.User;
 public class Order {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	
 	@NotBlank(message="Zip is required")
 	private String zip;

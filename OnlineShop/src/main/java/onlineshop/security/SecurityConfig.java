@@ -1,4 +1,4 @@
-package security;
+package onlineshop.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +16,14 @@ import onlineshop.service.UserPrincipalDetailsService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
+
 	private UserPrincipalDetailsService userPrincipalDetailsService;
 	
 	@Autowired
 	public SecurityConfig(UserPrincipalDetailsService userPrincipalDetailsService) {
 		this.userPrincipalDetailsService = userPrincipalDetailsService;
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http 
@@ -61,5 +61,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }

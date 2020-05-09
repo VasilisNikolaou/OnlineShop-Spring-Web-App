@@ -29,7 +29,7 @@ public class Cart implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	
 	@Column(name="total_price")
 	private double totalPrice;
