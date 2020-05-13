@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<title>Login</title>
+<link th:insert="fragment :: fragment-css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+</head>
+<body>
+	<header th:insert="fragment.html :: nav"></header>
+
+	<div th:if="${message != null}" class="alert alert-success mx-auto mt-3" role="alert" style="width: 200px;">
+      <p class="text-center" th:text="${message}">Successful message</p>
+    </div>
+ 
+	<div class="signup-form my-auto mx-auto">
+		<form th:action="@{/register}" th:object="${user}" method="post">
+			<h2>Create Account</h2>
+			<p class="lead">It's free and hardly takes more than 30 seconds.</p>
+
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Username" th:field="*{username}">
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name
+					Error</p>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-sm-6">
+					<input type="text" class="form-control" placeholder="First Name" th:field="*{firstName}">
+					<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">first name
+					Error</p>
+				</div>
+				<div class="form-group col-sm-6">
+					<input type="text" class="form-control" placeholder="Last Name" th:field="*{lastName}">
+					<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name
+					Error</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="email" class="form-control" placeholder="Email" th:field="*{email}">
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+					Error</p>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" placeholder="Password" th:field="*{password}">
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+					Error</p>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-block btn-lg">Sign
+					Up</button>
+			</div>
+			<p class="small text-center">
+				By clicking the Sign Up button, you agree to our <br> <a
+					href="#">Terms &amp; Conditions</a>, and <a href="#">Privacy
+					Policy</a>.
+			</p>
+		</form>
+		<div class="text-center">
+			Already have an account? <a th:href="@{/login}">Login here</a>.
+		</div>
+	</div>
+
+
+	<th:block th:insert="fragment.html :: assets"></th:block>
+</body>
+</html>
