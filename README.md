@@ -5,7 +5,7 @@ The aim of this project is to simulate a real world e-commerce web application w
 * Spring MVC
 * Spring cache
 * Spring security (database authentication)
-* JPA
+* Spring data JPA
 * MySQL
 * Bootstrap
 * Thymeleaf
