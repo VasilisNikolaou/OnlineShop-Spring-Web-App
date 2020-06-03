@@ -9,3 +9,4 @@ The aim of this project is to simulate a real world e-commerce web application w
 * MySQL
 * Bootstrap
 * Thymeleaf
+* Bean Validation 2.0
