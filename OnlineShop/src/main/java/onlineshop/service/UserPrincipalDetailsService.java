@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import onlineshop.model.User;
-import onlineshop.model.UserPrincipal;
+import onlineshop.security.UserPrincipal;
 import onlineshop.data.UserRepository;
 
 @Service

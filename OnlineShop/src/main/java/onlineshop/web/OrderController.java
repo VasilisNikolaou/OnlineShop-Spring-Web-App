@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import onlineshop.model.UserPrincipal;
 import onlineshop.model.Cart;
 import onlineshop.model.OrderItem;
 import onlineshop.model.User;
+import onlineshop.security.UserPrincipal;
 import onlineshop.data.CartRepository;
 import onlineshop.data.UserRepository;
 import onlineshop.model.Order;

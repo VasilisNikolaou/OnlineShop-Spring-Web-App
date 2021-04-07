@@ -1,4 +1,4 @@
-package onlineshop.model;
+package onlineshop.security;
 
 import java.util.Arrays;
 import java.util.Collection;
